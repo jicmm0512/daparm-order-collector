@@ -1,0 +1,20 @@
+다팜몰 v0.4 GitHub Actions 빌드 준비 파일
+
+이 ZIP은 GitHub에 업로드할 소스 묶음입니다. ZIP 자체를 저장소에 업로드하면 빌드되지 않습니다. 압축을 풀고 파일/폴더 구조를 그대로 GitHub 저장소 루트에 올려야 합니다.
+
+필수 구조:
+.github/workflows/build-apk.yml
+settings.gradle.kts
+build.gradle.kts
+app/build.gradle.kts
+app/src/main/AndroidManifest.xml
+app/src/main/java/kr/co/daparm/collector/MainActivity.kt
+app/src/main/java/kr/co/daparm/collector/KakaoListener.kt
+app/src/main/java/kr/co/daparm/collector/Store.kt
+
+GitHub Actions > Build Daparm APK > Run workflow
+빌드 성공 시 Artifacts의 daparm-v04-debug-apk를 다운로드합니다.
+
+이 앱은 주문장부 자동 연동 앱이 아니라 알림 수집 가능 여부 검증 앱입니다. 알림에 방 이름이 명시되지 않으면 개인정보 보호를 위해 수집하지 않습니다.
+빌드 및 실제 기기 설치는 아직 검증되지 않았습니다.
+공개 저장소에 회원 채팅이나 개인정보를 올리지 마세요.
