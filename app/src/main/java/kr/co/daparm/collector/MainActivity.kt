@@ -26,7 +26,7 @@ class MainActivity:Activity(){
   btn("알림 접근 권한 설정 열기"){startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))}
   btn("수집 내역 새로고침"){refresh()}
   btn("수집 내역 JSON 공유/저장"){val a=Store.all(this).toString(2);val intent=Intent(Intent.ACTION_SEND).apply{type="application/json";putExtra(Intent.EXTRA_TEXT,a)};startActivity(Intent.createChooser(intent,"수집 내역 내보내기"))}
-  btn("수집 내역 CSV 공유/저장"){val arr=Store.all(this);fun esc(v:String)=34.toChar().toString()+v.replace(34.toChar().toString(),34.toChar().toString().repeat(2))+34.toChar();val lines=mutableListOf("시간,방,회원,메시지,상태")
+  btn("수집 내역 CSV 공유/저장"){val arr=Store.all(this);fun esc(v:String):String { val q = 34.toChar().toString(); return q + v.replace(q, q + q) + q };val lines=mutableListOf("시간,방,회원,메시지,상태")
    for(i in 0 until arr.length()){val x=arr.getJSONObject(i);lines.add(listOf(x.optString("timestamp"),x.optString("room"),x.optString("sender"),x.optString("message"),x.optString("status")).joinToString(","){esc(it)})}
    val intent=Intent(Intent.ACTION_SEND).apply{type="text/csv";putExtra(Intent.EXTRA_TEXT,"\uFEFF"+lines.joinToString("\r\n"))};startActivity(Intent.createChooser(intent,"CSV 내용 공유"))}
   btn("수집 기록 전체 삭제"){android.app.AlertDialog.Builder(this).setTitle("기록 삭제").setMessage("수집된 모든 메시지를 삭제할까요?").setNegativeButton("취소",null).setPositiveButton("삭제"){_,_->Store.clear(this);refresh()}.show()}
