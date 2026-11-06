@@ -13,7 +13,13 @@ private fun isOrder(text: String): Boolean {
 class KakaoListener: NotificationListenerService() {
  override fun onNotificationPosted(sbn:StatusBarNotification?) {
   if(sbn==null || sbn.packageName!="com.kakao.talk") return
-  val room=Store.room(this)
+  android.util.Log.i(
+    "DaparmDiag",
+    "notification received: package=" + sbn.packageName +
+    ", configuredRoom=" + Store.room(this).isNotBlank()
+)
+
+        val room=Store.room(this)
   if(room.isBlank()) return // opt-in: no capture until exact room configured
   val e=sbn.notification.extras ?: return
   val title=e.getCharSequence(Notification.EXTRA_TITLE)?.toString()?.trim().orEmpty()
