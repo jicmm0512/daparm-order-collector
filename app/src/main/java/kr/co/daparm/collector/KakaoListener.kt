@@ -7,7 +7,7 @@ import android.service.notification.StatusBarNotification
 private fun isOrder(text: String): Boolean {
     val t = text.trim()
     if (t.contains("?") || t.contains("？")) return false
-    return Regex("[가-힣A-Za-z][가-힣A-Za-z0-9\s]*?\s*\d+\s*(개|봉|박스|팩|세트|통|병|kg|주문|$)").containsMatchIn(t)
+    return Regex("""[가-힣A-Za-z][가-힣A-Za-z0-9\s]*?\s*\d+\s*(개|봉|박스|팩|세트|통|병|kg|주문|$)""").containsMatchIn(t)
 }
 
 class KakaoListener: NotificationListenerService() {
